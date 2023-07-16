@@ -1,0 +1,11 @@
+Launch a web server with termination protection enabled
+Monitor Your EC2 instance
+    Monitoring tab -> enlarge -> metric
+    Action -> Monitor and troubleshoot -> Get system log
+Modify the security group that your web server is using to allow HTTP access
+Resize your Amazon EC2 instance to scale
+    storage tab -> actions -> modify -> volume
+Explore EC2 limits
+Test termination protection
+Terminate your EC2 instance
+    Action -> instance settings -> change termination protection

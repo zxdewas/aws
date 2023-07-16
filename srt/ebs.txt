@@ -1,0 +1,5 @@
+Create an Amazon EBS volume
+Attach and mount your volume to an EC2 instance *c
+Create a snapshot of your volume *c
+Create a new volume from your snapshot
+Attach and mount the new volume to your EC2 instance *c
