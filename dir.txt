@@ -1,5 +1,3 @@
-│   dir.txt
-│   
 ├───cmd
 │       cf.txt
 │       ebs.txt
