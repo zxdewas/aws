@@ -1,0 +1,153 @@
+1. To start the lab session, choose Start Lab in the upper-right corner of the page.
+o The lab session starts.
+o A timer displays in the upper-right corner of the page and shows the time remaining in
+the session.
+Tip: To refresh the session length at any time, choose Start Lab again before the timer
+reaches 0:00.
+2. Before continuing, wait until the lab environment is ready. The environment is ready
+when the circle icon next to the AWS link in the upper-left corner turns green.
+3.
+4. To return to these instructions, choose the Readme link in the upper-right corner.
+5. To connect to the AWS Management Console, choose the AWS link in the upper-left
+corner, above the terminal window.
+4. In the search box to the right of Services, search for and choose EC2 to open the EC2
+console.
+5. In the left navigation pane, choose EC2 Dashboard to ensure you are on the
+dashboard page.
+6. Choose the Launch instance button in the middle of the page, then select Launch
+instance from the dropdown menu.
+7. Choose the X on the right side of the blue banner to close the Opt-out to the old
+experience dialog.
+8. In the Name and tags panel:
+o For Name enter Web Server 1
+9. In the Application and OS Images panel:
+o For Quick Start, keep the default Amazon Linux chosen
+10.In the Instance type panel:
+o Keep the default instance type, t2.micro.
+11.In the Key pair (login) panel:
+o From the Key pair name - required dropdown list, choose vockey.
+12.In the Network settings section, choose Edit.
+o From the Subnet dropdown list, choose the existing subnet in Availability Zone us-
+east-1a.
+o For Security group name - required, enter Web Server security group
+o For Description - required, enter Security group for my web server
+o In the Inbound security groups rules section, Select Remove to remove the default
+rule.
+o Choose Add security group rule to configure new rule as below
+ Type : HTTP
+ Source type : Anywhere
+13.In the Configure storage panel:
+o Keep the default storage configuration.
+14.Scroll down, and expand Advanced Details Panel, the configure:
+o Scroll down to the field User data.
+o Copy the following code and paste it into the User data field.
+#!/bin/bash
+yum update -y
+yum -y install httpd
+systemctl enable httpd
+systemctl start httpd
+echo '<html><h1>Hello World! This is server 1.</h1></html>' > /var/www/html/index.html
+15.Choose Launch instance .
+16.On the next screen, Choose View all instances.
+17.Before you continue, wait for your instance to display the following:
+o Instance state: Running
+o Status check: 2/2 checks passed
+18.Select the Web Server 1 instance that you created earlier in this lab.
+19.In the Details tab copy the Public IPv4 address of your instance, then open a new tab
+in your web browser and paste in and load the address.
+It should display the web server page with the message *Hello World! This is server 1.**
+20.Return to the EC2 Management Console browser tab.
+21.Select the Web Server 1 instance.
+22.From the Actions menu, choose Images and templates, then choose Launch more
+like this
+A Launch an instance page opens.
+23.In the Name and tags pane, change the Name to Web Server 2.
+24.In the Key pair (login) section, from the Key pair name - required dropdown list,
+choose vockey.
+25.From the Subnet dropdown list, choose the existing subnet in Availability Zone us-
+east-1b.
+26.Scroll down, and expand the Advanced Details section, then scroll down to the User
+data field.
+27.Use copy and paste to replace the existing code with the code shown below.
+#!/bin/bash
+yum update -y
+yum -y install httpd
+systemctl enable httpd
+systemctl start httpd
+echo '<html><h1>Hello World! This is server 2.</h1></html>' > /var/www/html/index.html
+28.Choose Launch instance .
+29.On the next screen, Choose View all instances.
+30.Before you continue, wait for your instance to display the following:
+Instance state: Running
+Status check: 2/2 checks passed
+31.Select the Web Server 2 instance.
+32.In the Details tab copy the Public IPv4 address of your instance, then open a new tab
+in your web browser and paste in and load the address.
+33.This will open a new tab in your web browser and display the web server page with the
+message Hello World! This is server 2.
+34.Back in the EC2 console, in the left navigation pane, under Load Balancing, choose
+Load Balancers.
+35.Select Create Load Balancer.
+36.Under Application Load Balancer, choose Create.
+37.In the Basic Configuration panel:
+o For Name, enter myloadbalancer.
+38.In the Network mapping panel:
+o Under Mappings, select the Availability Zones that you created the two instances in.
+For example, us-east-1a and us-east-1b.
+39.
+40.In the Security Groups panel:
+o Choose Web Server security group from the drop down menu.
+o After you close the drop down menu, choose the X next to the default security group to
+remove it.
+41.In the Listeners and routing panel:
+o Chose Create target group.
+This will open a new tab in your browser.
+42.
+43.In the Basic Configuration panel:
+o Kepp the target type set to Instances.
+o For Target group name enter myalbTG
+44.In the Health checks panel:
+o For Health check path, enter index.html after the forward slash ( / )
+o The path should look like the following: /index.html
+45.Choose Next.
+46.In the Register targets page, in the Available instances panel, check the boxes next
+to the Web Server 1 and Web Server 2 instances that you created in this lab.
+47.Choose Include as pending below.
+Verify that both instances now appear in the Targets list below.
+48.Choose Create target group.
+49.Return to the Load Balancers console tab in the browser.
+50.In the Listeners and routing section, under Listener choose the refresh icon.
+51.From the dropdown, chose the myalbTG target group you created.
+52.Scroll down and chose Create load balancer.
+When the load balancer is created, a Successfully created load balancer message
+displays.
+53.Chose View load balancer.
+52.Select the load balancer that you just created, and choose the Description tab in the
+lower pane.
+
+53.In the Basic Configuration section, copy the DNS name value to your clipboard.
+
+54.Open a new tab in your web browser, paste the DNS name that you just copied, and
+press Enter.
+If your load balancer is working, the Hello World! message displays. Notice whether the
+message says This is server 1 or This is server 2.
+
+55.Refresh the browser tab a few times.
+Notice when the message changes between This is server 1 and This is server 2. When
+the message changes, it means that the load balancer has directed you to the web
+server on the other EC2 instance that you created in this lab.
+
+Lab complete
+Congratulations! You have completed the lab.
+
+56.Log out of the AWS Management Console.
+o In the upper-right corner of the page, choose your user name. Your user name begins
+with voclabs/user.
+o Choose Sign Out.
+
+57.Choose End Lab at the top of this page, and then select Yes to confirm that you want to
+end the lab.
+
+© 2022, Amazon Web Services, Inc. and its affiliates. All rights reserved. This work may
+not be reproduced or redistributed, in whole or in part, without prior written permission
+from Amazon Web Services, Inc. Commercial copying, lending, or selling is prohibited.

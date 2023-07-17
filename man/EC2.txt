@@ -1,0 +1,12 @@
+Ec2:
+1. go to launch instance
+2.  give a name in names and tags and name it has Web Server 1
+3. in key par login give it has vockey 
+4. in network settings click on edit option in that firewaal secuirty group name give it has Web Server and change the description has Secuirty group fro my Web Server 
+5. in inbound secuirty group click remove
+6. in advanced details add on the code to description 
+7. and click on launch instance
+8. click view all instances
+9. in public ipv4 address open address 
+10. download putty 
+11. from monitor and troubleshoot go to system log and click cancel

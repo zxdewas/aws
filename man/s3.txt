@@ -1,0 +1,16 @@
+1. open s3 console and create a bucket 
+2. uncheck the blocked access 
+3.click the tick option in acknowledge 
+4. scroll to the last page and click create bucket
+5. click the bucket name and go to permissions tab 
+6. in there click on the edit button on bucket policy 
+7. copy paste the policy codes in the blank space
+8. edit the code with our bucket name 
+9. click save changes
+10. choose the objects tab
+11. create a index.html file with notepad 
+12. and choose the file has index.html file 
+13. click on upload
+13. after uploading the file scroll down to permissions and select acls 
+14. enable the static web hosting under properties tab 
+15. you have the url and click it on new tab

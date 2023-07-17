@@ -1,0 +1,108 @@
+1. To start the lab session, choose Start Lab in the upper-right corner of the page.
+o The lab session starts.
+o A timer displays in the upper-right corner of the page and shows the time remaining in
+the session.
+2. Before continuing, wait until the lab environment is ready. The environment is ready
+when the lab details appear on the right side of the page and the circle icon next to
+the AWS link in the upper-left corner turns green.
+3. To return to these instructions, choose the Readme link in the upper-right corner.
+4. To connect to the AWS Management Console, choose the AWS link in the upper-left
+corner, above the terminal window.
+4. Choose the Services menu, locate the Developer Tools services, and
+select CloudShell.
+5.cd ~
+aws s3api create-bucket --bucket (bucket-name) --region us-east-1
+6. In the code that you copied, replace (bucket-name) with a unique Domain Name
+System (DNS)-compliant name for your new bucket.
+7. Run the updated code in the CloudShell terminal.
+If a pop-up window appears, choose Paste.
+The output should look similar to the following:
+{
+"Location": "/mylabbucket12345"
+}
+8. In the console, choose the Services menu, locate the Storage section, and choose S3.
+9. Choose the name of the bucket that you just created.
+10.Choose the Permissions tab.
+11.In the Bucket policy section, choose Edit.
+12.To grant public read access for your website, copy and paste the following bucket policy
+into the policy editor.
+
+{
+"Version":"2012-10-17",
+"Statement":[
+{
+"Sid":"PublicReadForGetBucketObjects",
+"Effect":"Allow",
+"Principal":"*",
+"Action":[
+"s3:GetObject"
+],
+"Resource":[
+"arn:aws:s3:::example-bucket/*"
+]
+}
+]
+}
+13.In the policy, replace example-bucket with the name of your bucket.
+14.At the bottom of the page, choose Save changes.
+15.Open the context menu (right-click) for the following link, and then choose Save link
+as: index.html
+16.Save the index.html file to your local computer.
+17.In the console, choose the Objects tab.
+18.Upload the index.html file to your bucket.
+o Choose Upload.
+o Drag and drop the index.html file onto the upload page. An alternative is to choose Add
+files, navigate to the file, and choose Open.
+19.Expand the Permissions section.
+20.Under Predefined ACLs, select Grant public-read access.
+A warning message similar to Granting public-read access is not
+recommend appears below the setting you selected.
+21.Below the warning, check the box next to I understand....
+22.At the bottom of the page, choose Upload.
+23.Choose Close.
+24.Select the Properties tab, and scroll down to the Static website hosting section.
+25.Choose Edit.
+26.Select Enable.
+27.In the Index document text box, enter index.html
+28.Select Save changes.
+29.Scroll down to the Static website hosting section again, and copy the Bucket website
+endpoint URL to your clipboard.
+30.Open a new tab in your web browser, paste the URL you just copied, and press Enter.
+31.Choose the Services menu, locate the Networking & Content Delivery section, and
+choose CloudFront.
+32.Choose Create Distribution.
+33.Under Web, choose Get Started.
+34.Choose the text box next to Origin Domain Name and select the endpoint from your S3
+bucket.
+35.For Viewer Protocol Policy, ensure that HTTP and HTTPS is selected.
+36.Scroll to the bottom of the page and select Create Distribution.
+37.Copy the Domain Name value for your distribution and save it to a text editor to use in
+a later step.
+38.Create a new HTML file to test the distribution.
+o Find and download an image from the internet.
+o Navigate to your S3 bucket and upload the image file to it, making sure to grant public
+access as you did when uploading the HTML file earlier in this lab.
+o Create a new text file using Notepad and copy the following text into it:
+
+<html>
+<head>My CloudFront Test</head>
+<body>
+<p>My test content goes here.</p>
+<p><img src="http://domain-name/object-name" alt="my test image">
+</body>
+
+</html>
+o Replace domain-name with the domain name that you copied earlier for your
+CloudFront distribution.
+o Replace object-name with the file name of the picture file that you uploaded to your S3
+bucket.
+The edited line of code should look similar to the following:
+
+<p><img src="http://d2f1zrxb2zaf30.cloudfront.net/picture.jpg" alt="my test image">
+39.Use an internet browser to open the HTML file that you just created.
+40.Log out of the AWS Management Console.
+o In the upper-right corner of the page, choose your user name. Your user name begins
+with voclabs/user.
+o Choose Sign Out.
+41.Choose End Lab at the top of this page, and then select Yes to confirm that you want to
+end the lab.

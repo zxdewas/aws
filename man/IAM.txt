@@ -1,0 +1,18 @@
+IAM:
+1. in access management in users 
+2. in user name 1 give user has name 
+3. we have to create 3 users name 
+4.  in the left panel create User groups 
+5. create group 
+6. create a user group name 
+i) Ec-2Support for name one
+7. in second page of attach permissions click AmazonEc2Read only Access 
+8. create second group 
+9. create S3-Support
+10. for this you have to give permission policies eg: read only access
+11. create the user 1 in the Ec2 support bucket user group name
+12. add user 2 to user group name to ec2 support
+13. secuirty credentials from there manage console access enable console access and create a custom password
+14. copy the link from iam dashboard and paste the link in incognito tab 
+15. give a iam username and type user1 
+16. Ec2 output will be displayed

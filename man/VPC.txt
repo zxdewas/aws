@@ -1,0 +1,148 @@
+1. At the top of these instructions, choose Start Lab to launch your lab.
+2. Wait until you see the message "Lab status: ready", then choose the X to close the
+Start Lab panel
+3. At the top of these instructions, choose AWS
+4. Arrange the AWS Management Console tab so that it displays along side these
+instructions. Ideally, you will be able to see both browser tabs at the same time, to make
+it easier to follow the lab steps.
+Task 1: Create Your VPC
+In this task, you will use the VPC and more option in the VPC console to create multiple
+resources, including a VPC, an Internet Gateway, a public subnet and a private subnet
+in a single Availability Zone, two route tables, and a NAT Gateway.
+
+5. In the search box to the right of Services, search for and choose VPC to open the VPC
+console.
+6. Begin creating a VPC.
+o In the top left of the screen, verify the New VPC Experience is toggled on. If it is not,
+toogle it on now.
+o Choose the VPC dashboard link which is also towards the top left of the console.
+o Next, choose Create VPC.
+7. Configure the VPC details in the VPC settings panel on the left:
+o Choose VPC and more.
+o Under Name tag auto-generation, keep Auto-generate selected, however change the
+value from project to lab.
+o Keep the IPv4 CIDR block set to 10.0.0.0/16
+o For Number of Availability Zones, choose 1.
+o For Number of public subnets, keep the 1 setting.
+o For Number of private subnets, keep the 1 setting.
+o Expand the Customize subnets CIDR blocks section
+ Change Public subnet CIDR block in us-east-1a to 10.0.0.0/24
+ Change Private subnet CIDR block in us-east-1a to 10.0.1.0/24
+o Set NAT gateways to In 1 AZ.
+o Set VPC endpoints to None.
+o Keep both DNS hostnames and DNS resolution enabled.
+
+8. In the Preview panel on the right, confirm the settings you have configured.
+o VPC: lab-vpc
+o Subnets:
+ us-east-1a
+ Public subnet name: lab-subnet-public1-us-east-1a
+ Private subnet name: lab-subnet-private1-us-east-1a
+o Route tables
+ lab-rtb-public
+ lab-rtb-private1-us-east-1a
+o Network connections
+ lab-igw
+ lab-nat-public1-us-east-1a
+
+9. At the bottom of the screen, choose Create VPC
+10.Once it is complete, choose View VPC
+11.In the left navigation pane, choose Subnets.
+12.Choose Create subnet then configure:
+o VPC ID: lab-vpc (select from the menu).
+o Subnet name: lab-subnet-public2
+o Availability Zone: Select the second Availability Zone (for example, us-east-1b)
+o IPv4 CIDR block: 10.0.2.0/24
+13.Choose Create subnet
+14.Choose Create subnet then configure:
+o VPC ID: lab-vpc
+o Subnet name: lab-subnet-private2
+o Availability Zone: Select the second Availability Zone (for example, us-east-1b)
+o IPv4 CIDR block: 10.0.3.0/24
+15.Choose Create subnet
+16.In the left navigation pane, choose Route tables.
+17.Select the lab-rtb-private1-us-east-1a route table.
+18.In the lower pane, choose the Routes tab.
+19.Choose the Subnet associations tab.
+20.Choose Edit subnet associations
+21.Leave lab-subnet-private1-us-east-1a selected, but also select lab-subnet-private2.
+22.Choose Save associations
+23.Select the lab-rtb-public route table (and deselect any other subnets).
+24.In the lower pane, choose the Routes tab.
+25.Choose the Subnet associations tab.
+26.Choose Edit subnet associations
+27.Leave lab-subnet-public1-us-east-1a selected, but also select lab-subnet-public2.
+28.Choose Save associations
+29.In the left navigation pane, choose Security groups.
+30.Choose Create security group and then configure:
+o Security group name: Web Security Group
+o Description: Enable HTTP access
+o VPC: choose the X to remove the currently selected VPC, then from the drop down list
+choose lab-vpc
+31.In the Inbound rules pane, choose Add rule
+32.Configure the following settings:
+o Type: HTTP
+o Source: Anywhere-IPv4
+o Description: Permit web requests
+33.Scroll to the bottom of the page and choose Create security group
+34.In the search box to the right of Services, search for and choose EC2 to open the EC2
+console.
+
+35.From the Launch instance menu choose Launch instance.
+
+36.Name the instance:
+o Give it the name Web Server 1
+When you name your instance, AWS creates a tag and associates it with the instance.
+A tag is a key value pair. The key for this pair is *Name*, and the value is the name you
+enter for your EC2 instance.
+
+37.Choose an AMI from which to create the instance:
+o In the list of available Quick Start AMIs, keep the default Amazon Linux AMI selected.
+o Also keep the default Amazon Linux 2 AMI (HVM) selected.
+The type of Amazon Machine Image (AMI) you choose determines the Operating
+System that will run on the EC2 instance that you launch.
+
+38.Choose an Instance type:
+o In the Instance type panel, keep the default t2.micro selected.
+The Instance Type defines the hardware resources assigned to the instance.
+39.Select the key pair to associate with the instance:
+o From the Key pair name menu, select vockey.
+The vockey key pair you selected will allow you to connect to this instance via SSH after
+it has launched. Although you will not need to do that in this lab, it is still required to
+identify an existing key pair, or create a new one, when you launch an instance.
+40.Configure the Network settings:
+o Next to Network settings, choose Edit, then configure:
+ Network: lab-vpc
+ Subnet: lab-subnet-public2 (not Private!)
+ Auto-assign public IP: Enable
+o Next, you will configure the instance to use the Web Security Group that you created
+earlier.
+ Under Firewall (security groups), choose Select an existing security group.
+ For Common security groups, select Web Security Group.
+This security group will permit HTTP access to the instance.
+41.In the Configure storage section, keep the default settings.
+42.Configure a script to run on the instance when it launches:
+o Expand the Advanced details panel.
+o Scroll to the bottom of the page and then copy and paste the code shown below into the
+User data box:
+#!/bin/bash
+# Install Apache Web Server and PHP
+yum install -y httpd mysql php
+# Download Lab files
+wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-ACCLFO-2/2-lab2-vpc/s3/lab-app.zip
+unzip lab-app.zip -d /var/www/html/
+# Turn on web server
+chkconfig httpd on
+service httpd start
+43.At the bottom of the Summary panel on the right side of the screen choose Launch
+instance
+44.Choose View all instances
+45.Wait until Web Server 1 shows 2/2 checks passed in the Status check column.
+46.Select Web Server 1.
+47.Copy the Public IPv4 DNS value shown in the Details tab at the bottom of the page.
+48.Open a new web browser tab, paste the Public DNS value and press Enter.
+49.Choose End Lab at the top of this page and then choose Yes to confirm that you want
+to end the lab.
+A panel will appear, indicating that "DELETE has been initiated... You may close this
+message box now."
+50.Choose the X in the top right corner to close the panel.

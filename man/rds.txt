@@ -1,0 +1,15 @@
+Rds: 
+1. Create database 
+2. Easy create ,ms SQL server
+3. Click free tier
+4. Give a name for database 
+5. Create a password 
+6. Create database button
+7. In database connectivity in that connectivity and security click the security link
+8. In that security link created click the link and click edit inbound rule 
+9. Add rule - all traffic , anywhere ipv4 save changes
+10. Copy the endpoint in dashboard
+11. Paste the endpoint in SSMS software 
+12. Change the server name as SQL server authentication
+13. Give username and password
+14. Click modify and change the additional configuration and click enable for public access and apply immediately and click modify db instance
