@@ -1,0 +1,10 @@
+create bucket
+Create a CloudFront Distribution.
+Under Origin, select the endpoint from your S3 bucket.
+Viewer Protocol Policy, HTTP and HTTPS is selected.
+select Create Distribution.
+*take up to 20 minutes.*
+When the Status says Enabled, you can test your distribution.
+Copy Domain Name of cf
+upload image
+create html using image

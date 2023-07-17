@@ -1,0 +1,12 @@
+create ec2
+create target grop
+create lb
+    select vpc
+    2 pubilc subnet
+    add sg rule
+    create lb
+crete launch template
+action -> Create Auto Scaling group
+    vpc  2 private subnet
+attach lb target grop
+create auto Scaling grop
