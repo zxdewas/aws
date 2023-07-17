@@ -1,3 +1,5 @@
+│   dir.txt
+│   
 ├───cmd
 │       cf.txt
 │       ebs.txt
@@ -14,7 +16,7 @@
 │       rds.txt
 │       s3.txt
 │       vpc.txt
-│       
+│
 └───srt
         cf.txt
         ebs.txt
